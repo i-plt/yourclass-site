@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yourClass.online — подготовка к ЕГЭ и ОГЭ</title>
+<meta name="description" content="Онлайн-подготовка к ЕГЭ и ОГЭ по математике и информатике: курсы по заданиям экзамена, тренировочные работы, тесты, пробные варианты и индивидуальные занятия.">
+<link rel="canonical" href="https://yourclass.online/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yourClass.online — подготовка к ЕГЭ и ОГЭ">
+<meta property="og:description" content="Курсы по заданиям экзамена, тренировочные работы, тесты и индивидуальные занятия.">
+<meta property="og:url" content="https://yourclass.online/">
+<meta property="og:image" content="https://yourclass.online/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#16181d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf7; --bg-alt:#f3f1ec; --surface:#ffffff; --text:#16181d; --muted:#5b606b;
+  --line:#e4e1d9; --brand:#f59a0c; --brand-strong:#d97f00; --brand-soft:#fff1d9;
+  --on-brand:#1b1305; --shadow:0 1px 2px rgba(20,20,30,.05),0 8px 24px rgba(20,20,30,.06);
+  --radius:16px; --max:1120px;
+  --ill-desk:#e3d5bd; --ill-laptop:#c9ced6; --ill-laptop-edge:#aab1bc; --ill-hoodie:#4263eb; --ill-hoodie-dark:#2f4bc4;
+  --ill-panel:#eef1f6; --ill-panel-top:#ffffff; --ill-panel-edge:#c9d0db; --ill-monitor:#d5dbe5; --ill-shine:rgba(255,255,255,.4);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181d; --bg-alt:#1c1f25; --surface:#21252c; --text:#eef0f3; --muted:#a3a9b4;
+    --line:#2f343d; --brand:#ffad2e; --brand-strong:#ffbf55; --brand-soft:#3a2c14;
+    --on-brand:#1b1305; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --ill-desk:#3a3f48; --ill-laptop:#5b6370; --ill-laptop-edge:#474e5a; --ill-hoodie:#5c7cfa; --ill-hoodie-dark:#4263eb;
+    --ill-panel:#2a2f38; --ill-panel-top:#3a404b; --ill-panel-edge:#14171c; --ill-monitor:#4a515d; --ill-shine:rgba(255,255,255,.06);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181d; --bg-alt:#1c1f25; --surface:#21252c; --text:#eef0f3; --muted:#a3a9b4;
+  --line:#2f343d; --brand:#ffad2e; --brand-strong:#ffbf55; --brand-soft:#3a2c14;
+  --on-brand:#1b1305; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --ill-desk:#3a3f48; --ill-laptop:#5b6370; --ill-laptop-edge:#474e5a; --ill-hoodie:#5c7cfa; --ill-hoodie-dark:#4263eb;
+    --ill-panel:#2a2f38; --ill-panel-top:#3a404b; --ill-panel-edge:#14171c; --ill-monitor:#4a515d; --ill-shine:rgba(255,255,255,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--text);
+  font:400 17px/1.6 "Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif}
+img,svg{display:block; max-width:100%}
+a{color:inherit}
+h1,h2,h3{line-height:1.15; margin:0; font-weight:700; letter-spacing:-.01em}
+h1{font-size:clamp(30px,4.6vw,50px)}
+h2{font-size:clamp(26px,3.6vw,38px)}
+h3{font-size:20px; font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+@media (max-width:600px){ .wrap{padding:0 16px} body{font-size:16px} }
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:48px; padding:0 22px; border-radius:999px; border:1.5px solid transparent;
+  font:600 16px/1 inherit; font-family:inherit; text-decoration:none; cursor:pointer;
+  transition:background .15s,border-color .15s,transform .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand); color:var(--on-brand)}
+.btn-primary:hover{background:var(--brand-strong)}
+.btn-ghost{background:transparent; color:var(--text); border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--brand)}
+.btn:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+
+/* header */
+header.top{position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line)}
+.top .wrap{display:flex; align-items:center; gap:20px; height:68px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; font-size:20px; letter-spacing:-.01em}
+.brand img{width:30px; height:40px}
+.brand b{color:var(--brand)}
+nav.links{display:flex; gap:24px; margin-left:auto}
+nav.links a{text-decoration:none; color:var(--muted); font-weight:500}
+nav.links a:hover{color:var(--text)}
+.top .btn{min-height:42px; padding:0 18px; font-size:15px}
+@media (max-width:860px){ nav.links{display:none} .top .btn{margin-left:auto} }
+@media (max-width:480px){ .top .btn .opt{display:none} .brand{font-size:18px} }
+
+/* hero */
+.hero{padding:88px 0 72px; position:relative; overflow:hidden}
+.hero .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
+.eyebrow{display:inline-block; padding:6px 12px; border-radius:999px; background:var(--brand-soft);
+  color:var(--brand-strong); font-weight:600; font-size:14px; margin-bottom:20px}
+.hero p.lead{font-size:clamp(18px,2vw,21px); color:var(--muted); margin:22px 0 32px; max-width:34em}
+.cta{display:flex; flex-wrap:wrap; gap:12px}
+.hero-art{justify-self:center; width:100%; max-width:480px; height:auto; overflow:visible}
+.float{animation:bob 6s ease-in-out infinite}
+.f2{animation-delay:-2s}.f3{animation-delay:-4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.float{animation:none}}
+@media (max-width:860px){
+  .hero{padding:48px 0 56px}
+  .hero .wrap{grid-template-columns:1fr; gap:32px}
+  .hero-art{max-width:380px}
+}
+
+/* sections */
+section{padding:80px 0}
+section.alt{background:var(--bg-alt)}
+.sec-head{max-width:40em; margin-bottom:40px}
+.sec-head p{color:var(--muted); margin-top:14px; font-size:18px}
+@media (max-width:600px){ section{padding:56px 0} .sec-head{margin-bottom:28px} }
+
+.grid{display:grid; gap:20px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:960px){ .g3{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){ .g3,.g2{grid-template-columns:1fr} }
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px; box-shadow:var(--shadow)}
+.card p{color:var(--muted); margin-top:10px}
+.card ul{margin:14px 0 0; padding:0; list-style:none; color:var(--muted)}
+.card li{padding:6px 0 6px 22px; position:relative; border-top:1px dashed var(--line)}
+.card li:first-child{border-top:0}
+.card li::before{content:""; position:absolute; left:2px; top:15px; width:0; height:0;
+  border-left:9px solid var(--brand); border-top:5px solid transparent; border-bottom:5px solid transparent}
+.courses{display:flex; flex-wrap:wrap; justify-content:center; gap:20px}
+.courses .card{padding:0 26px 26px; overflow:hidden; flex:0 1 calc((100% - 40px)/3)}
+@media (max-width:960px){ .courses .card{flex-basis:calc((100% - 20px)/2)} }
+@media (max-width:640px){ .courses .card{flex-basis:100%} }
+.art{margin:0 -26px 20px; background:var(--bg-alt); border-bottom:1px solid var(--line); padding:14px 0 6px}
+.card-art{display:block; width:100%; max-width:320px; height:auto; margin:0 auto}
+.tag{display:inline-block; font-size:13px; font-weight:600; padding:3px 10px; border-radius:999px;
+  background:var(--bg-alt); color:var(--muted); border:1px solid var(--line); margin-bottom:14px}
+.tag.hot{background:var(--brand-soft); color:var(--brand-strong); border-color:transparent}
+
+/* steps */
+.steps{counter-reset:s; display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.step{position:relative; padding-top:54px}
+.step::before{counter-increment:s; content:counter(s); position:absolute; top:0; left:0;
+  width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+  background:var(--brand); color:var(--on-brand); font-weight:700}
+.step p{color:var(--muted); margin-top:8px}
+@media (max-width:960px){ .steps{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){ .steps{grid-template-columns:1fr} }
+
+/* plans */
+.plan{display:flex; flex-direction:column}
+.plan.featured{border:2px solid var(--brand)}
+.plan .btn{margin-top:auto}
+.plan ul{margin-bottom:24px}
+
+/* contact */
+.contact{text-align:center}
+.contact .card{max-width:640px; margin:0 auto; padding:44px 28px}
+.contact p{margin:14px auto 28px; max-width:30em}
+.mail{display:block; font-weight:600; font-size:clamp(20px,3vw,26px); margin-bottom:24px; text-decoration:none; word-break:break-all}
+.mail:hover{color:var(--brand-strong)}
+
+footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted); font-size:15px}
+footer .wrap{display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; justify-content:space-between}
+footer a{text-decoration:none}
+footer a:hover{color:var(--text)}
+
+/* login dialog */
+dialog{border:0; padding:0; border-radius:20px; background:var(--surface); color:var(--text);
+  width:min(420px,calc(100vw - 32px)); box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,12,16,.55); backdrop-filter:blur(3px)}
+.dlg{padding:32px 28px 28px; position:relative}
+.dlg img{width:30px; height:40px; margin-bottom:16px}
+.dlg h2{font-size:26px}
+.dlg .sub{color:var(--muted); margin:8px 0 22px; font-size:15px}
+.field{display:block; margin-bottom:14px}
+.field span{display:block; font-size:14px; font-weight:500; margin-bottom:6px}
+.field input{width:100%; min-height:48px; padding:0 14px; border-radius:12px; border:1.5px solid var(--line);
+  background:var(--bg); color:var(--text); font:inherit; font-size:16px}
+.field input:focus{border-color:var(--brand); outline:none}
+.dlg .btn{width:100%; margin-top:8px}
+.close{position:absolute; top:12px; right:12px; width:40px; height:40px; border-radius:50%;
+  border:0; background:transparent; color:var(--muted); font-size:26px; line-height:1; cursor:pointer}
+.close:hover{background:var(--bg-alt); color:var(--text)}
+.notice{display:none; margin-top:18px; padding:14px 16px; border-radius:12px; background:var(--brand-soft); font-size:15px}
+.notice.show{display:block}
+</style>
+</head>
+<body>
+<!--art:defs--><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="ball-or" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#FFD98A"/><stop offset=".45" stop-color="#F59A0C"/><stop offset="1" stop-color="#B86A00"/></radialGradient><radialGradient id="ball-bl" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#B3C3FF"/><stop offset=".45" stop-color="#4C6EF5"/><stop offset="1" stop-color="#2A3FA8"/></radialGradient><radialGradient id="ball-gr" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#9BE8BE"/><stop offset=".45" stop-color="#2FB36C"/><stop offset="1" stop-color="#17773F"/></radialGradient><radialGradient id="ball-pu" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#D6C2FF"/><stop offset=".45" stop-color="#8E5CF0"/><stop offset="1" stop-color="#5A31B0"/></radialGradient><radialGradient id="ball-gy" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#E6EAF0"/><stop offset=".45" stop-color="#9AA3B2"/><stop offset="1" stop-color="#626B7A"/></radialGradient><linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ill-panel-top)"/><stop offset="1" stop-color="var(--ill-panel)"/></linearGradient><linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c3a5e"/><stop offset="1" stop-color="#151d33"/></linearGradient><filter id="blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="4"/></filter><filter id="ds" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".18"/></filter></defs></svg><!--/art-->
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="yourClass.online — на главную">
+      <img src="logo.svg" alt="" width="30" height="40">
+      <span>yourClass<b>.online</b></span>
+    </a>
+    <nav class="links" aria-label="Разделы">
+      <a href="#courses">Курсы</a>
+      <a href="#how">Как устроено</a>
+      <a href="#plans">Форматы</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <button class="btn btn-ghost" type="button" data-open-login>Вход<span class="opt">&nbsp;для учеников</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">ЕГЭ и ОГЭ · онлайн</span>
+        <h1>Подготовка к экзамену — по шагам, от теории до пробных вариантов на основе реальных экзаменов</h1>
+        <p class="lead">Курсы по заданиям ЕГЭ и ОГЭ по математике и информатике: понятная теория с разобранными примерами, тренировочные работы, тесты и пробные варианты. Самостоятельно, с сопровождением или на индивидуальных занятиях.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">Написать нам</a>
+          <a class="btn btn-ghost" href="#courses">Посмотреть курсы</a>
+        </div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 480 440" role="img" aria-label="Ученик занимается за ноутбуком">
+        <defs>
+          <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity=".12"/></filter>
+        </defs>
+        <circle cx="240" cy="236" r="178" fill="var(--brand-soft)"/>
+        <circle cx="96" cy="86" r="5" fill="var(--brand)"/>
+        <circle cx="430" cy="290" r="6" fill="var(--brand)" opacity=".6"/>
+        <path d="M310 150 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z" fill="var(--brand)"/>
+        <!-- стол -->
+        <rect x="36" y="362" width="408" height="14" rx="7" fill="var(--ill-desk)"/>
+        <!-- растение -->
+        <ellipse cx="78" cy="300" rx="11" ry="26" fill="#3fae7a" transform="rotate(-25 78 300)"/>
+        <ellipse cx="100" cy="294" rx="11" ry="28" fill="#2f9a68" transform="rotate(18 100 294)"/>
+        <ellipse cx="89" cy="288" rx="10" ry="30" fill="#46bf86"/>
+        <path d="M70 322 H108 L102 362 H76 Z" fill="#d9784f"/>
+        <!-- кружка -->
+        <path d="M398 332 a12 12 0 0 1 0 22" fill="none" stroke="var(--brand-strong)" stroke-width="5"/>
+        <rect x="368" y="324" width="32" height="38" rx="6" fill="var(--brand)"/>
+        <path d="M378 312 q-6 -8 0 -16 M390 312 q-6 -8 0 -16" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
+        <!-- ученик -->
+        <path d="M156 362 C156 300 184 262 240 262 C296 262 324 300 324 362 Z" fill="var(--ill-hoodie)"/>
+        <path d="M222 263 L240 288 L258 263" fill="none" stroke="var(--ill-hoodie-dark)" stroke-width="4" stroke-linejoin="round"/>
+        <rect x="228" y="236" width="24" height="30" rx="8" fill="#e8b48e"/>
+        <circle cx="196" cy="206" r="10" fill="#f2c5a0"/>
+        <circle cx="284" cy="206" r="10" fill="#f2c5a0"/>
+        <ellipse cx="240" cy="200" rx="44" ry="48" fill="#f2c5a0"/>
+        <path d="M194 206 C184 152 218 134 244 136 C276 138 298 160 286 206 C282 190 276 180 268 174 C252 190 226 196 208 190 C202 194 197 200 194 206 Z" fill="#2b2118"/>
+        <path d="M236 142 C244 126 262 126 266 134 C256 134 248 138 244 146 Z" fill="#2b2118"/>
+        <circle cx="216" cy="222" r="7" fill="#f4a38a" opacity=".55"/>
+        <circle cx="264" cy="222" r="7" fill="#f4a38a" opacity=".55"/>
+        <rect x="210" y="194" width="27" height="21" rx="8" fill="#fff" fill-opacity=".3" stroke="#1f2430" stroke-width="3"/>
+        <rect x="243" y="194" width="27" height="21" rx="8" fill="#fff" fill-opacity=".3" stroke="#1f2430" stroke-width="3"/>
+        <path d="M237 203 h6" stroke="#1f2430" stroke-width="3"/>
+        <circle cx="224" cy="205" r="3.2" fill="#1f2430"/>
+        <circle cx="256" cy="205" r="3.2" fill="#1f2430"/>
+        <path d="M229 228 Q240 237 251 228" fill="none" stroke="#1f2430" stroke-width="3" stroke-linecap="round"/>
+        <!-- ноутбук -->
+        <rect x="156" y="274" width="168" height="88" rx="9" fill="var(--ill-laptop)"/>
+        <path d="M231 302 V325 L251 313.5 Z" fill="var(--brand)" stroke="var(--brand)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M232.5 334 L250 324" stroke="var(--brand)" stroke-width="4.5" stroke-linecap="round"/>
+        <rect x="132" y="356" width="216" height="10" rx="5" fill="var(--ill-laptop-edge)"/>
+        <circle cx="160" cy="346" r="11" fill="#f2c5a0"/>
+        <circle cx="320" cy="346" r="11" fill="#f2c5a0"/>
+        <!-- карточки -->
+        <g class="float f1" filter="url(#sh)">
+          <rect x="40" y="128" width="124" height="54" rx="14" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="102" y="162" text-anchor="middle" font-family="'STIX Two Math','Cambria Math',Georgia,serif" font-style="italic" font-size="21" fill="var(--text)">f′(x) = 2x</text>
+        </g>
+        <g class="float f2" filter="url(#sh)">
+          <rect x="326" y="78" width="126" height="54" rx="14" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="389" y="111" text-anchor="middle" font-family="Menlo,Consolas,monospace" font-size="16" fill="var(--text)"><tspan fill="var(--brand-strong)">print</tspan>(42)</text>
+        </g>
+        <g class="float f3" filter="url(#sh)">
+          <circle cx="410" cy="206" r="24" fill="#2fb36c"/>
+          <path d="M399 206 l8 8 15 -16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="float f2" filter="url(#sh)">
+          <rect x="34" y="200" width="82" height="44" rx="12" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="75" y="229" text-anchor="middle" font-family="'STIX Two Math','Cambria Math',Georgia,serif" font-size="19" fill="var(--text)"><tspan font-style="italic">x</tspan>² ⩾ 0</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section id="courses" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Курсы</h2>
+        <p>Каждый курс посвящён одной теме или одному заданию экзамена. Курсы одного экзамена собираются в пакет — можно взять весь экзамен или только то, что вызывает трудности.</p>
+      </div>
+      <div class="courses">
+        <article class="card">
+          <div class="art"><!--art:prof--><svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="График функции и касательная"><ellipse cx="120" cy="138" rx="92" ry="12.9" fill="#000" opacity=".13" filter="url(#blur)"/><g filter="url(#ds)"><rect x="36" y="19" width="168" height="116" rx="16" fill="var(--ill-panel-edge)"/><rect x="36" y="14" width="168" height="116" rx="16" fill="url(#panel)"/><rect x="42" y="18" width="156" height="6" rx="3" fill="var(--ill-shine)"/></g><g ><path d="M58 112 H186" fill="none" stroke="#626B7A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M58 112 H186" fill="none" stroke="#9AA3B2" stroke-width="3.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.4 -0.4)"/><path d="M58 112 H186" fill="none" stroke="#E6EAF0" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.1 -1.1)"/></g><g ><path d="M70 122 V30" fill="none" stroke="#626B7A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M70 122 V30" fill="none" stroke="#9AA3B2" stroke-width="3.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.4 -0.4)"/><path d="M70 122 V30" fill="none" stroke="#E6EAF0" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.1 -1.1)"/></g><g ><path d="M78 40 Q122 150 170 42" fill="none" stroke="#B86A00" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 40 Q122 150 170 42" fill="none" stroke="#F59A0C" stroke-width="10.1" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1.1 -1.1)"/><path d="M78 40 Q122 150 170 42" fill="none" stroke="#FFD98A" stroke-width="2.9" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.9 -2.9)"/></g><g ><path d="M107 111 L175 65" fill="none" stroke="#2A3FA8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M107 111 L175 65" fill="none" stroke="#4C6EF5" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.7 -0.7)"/><path d="M107 111 L175 65" fill="none" stroke="#B3C3FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.8 -1.8)"/></g><circle cx="137" cy="91" r="9" fill="url(#ball-bl)"/></svg><!--/art--></div>
+          <span class="tag hot">ЕГЭ · профиль</span>
+          <h3>Математика. Профильный уровень</h3>
+          <ul>
+            <li>Все задания первой и второй части экзамена</li>
+            <li>Основы теории вероятностей</li>
+            <li>Векторы и координаты в стереометрии</li>
+            <li>Пробные варианты экзамена</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="art"><!--art:base--><svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="Знак процента"><ellipse cx="120" cy="138" rx="90" ry="12.6" fill="#000" opacity=".13" filter="url(#blur)"/><g ><path d="M146 34 L96 122" fill="none" stroke="#B86A00" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M146 34 L96 122" fill="none" stroke="#F59A0C" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1.4 -1.4)"/><path d="M146 34 L96 122" fill="none" stroke="#FFD98A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-3.5 -3.5)"/></g><g ><path d="M84 54 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#2A3FA8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M84 54 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#4C6EF5" stroke-width="9.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1.0 -1.0)"/><path d="M84 54 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#B3C3FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.7 -2.7)"/></g><g ><path d="M158 104 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#2A3FA8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M158 104 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#4C6EF5" stroke-width="9.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1.0 -1.0)"/><path d="M158 104 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0" fill="none" stroke="#B3C3FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.7 -2.7)"/></g><circle cx="196" cy="120" r="12" fill="url(#ball-gr)"/><circle cx="46" cy="116" r="9" fill="url(#ball-or)"/></svg><!--/art--></div>
+          <span class="tag hot">ЕГЭ · база</span>
+          <h3>Математика. Базовый уровень</h3>
+          <ul>
+            <li>Проценты, округление, практические задачи</li>
+            <li>Графики, диаграммы, вероятность</li>
+            <li>Геометрия на клетчатой бумаге и в пространстве</li>
+            <li>Пробные варианты экзамена</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="art"><!--art:oge--><svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="Треугольник со вписанной окружностью"><ellipse cx="120" cy="140" rx="80" ry="11.2" fill="#000" opacity=".13" filter="url(#blur)"/><g ><path d="M60 126 L180 126 L120 22 Z" fill="none" stroke="#17773F" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 126 L180 126 L120 22 Z" fill="none" stroke="#2FB36C" stroke-width="8.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.9 -0.9)"/><path d="M60 126 L180 126 L120 22 Z" fill="none" stroke="#9BE8BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.4 -2.4)"/></g><g ><path d="M120 92 m-31 0 a31 31 0 1 0 62 0 a31 31 0 1 0 -62 0" fill="none" stroke="#B86A00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M120 92 m-31 0 a31 31 0 1 0 62 0 a31 31 0 1 0 -62 0" fill="none" stroke="#F59A0C" stroke-width="7.0" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.8 -0.8)"/><path d="M120 92 m-31 0 a31 31 0 1 0 62 0 a31 31 0 1 0 -62 0" fill="none" stroke="#FFD98A" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.0 -2.0)"/></g><circle cx="120" cy="92" r="6" fill="url(#ball-bl)"/><circle cx="196" cy="46" r="9" fill="url(#ball-bl)"/><circle cx="42" cy="70" r="7" fill="url(#ball-or)"/></svg><!--/art--></div>
+          <span class="tag hot">ОГЭ</span>
+          <h3>Математика. ОГЭ</h3>
+          <ul>
+            <li>Все задания первой и второй части экзамена</li>
+            <li>Практико-ориентированные задачи</li>
+            <li>Геометрия: от фактов к решению задач</li>
+            <li>Пробные варианты экзамена</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="art"><!--art:inf--><svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="Монитор с командной строкой"><ellipse cx="120" cy="140" rx="80" ry="11.2" fill="#000" opacity=".13" filter="url(#blur)"/><g ><path d="M120 116 V130 M96 132 H144" fill="none" stroke="#626B7A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M120 116 V130 M96 132 H144" fill="none" stroke="#9AA3B2" stroke-width="7.0" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.8 -0.8)"/><path d="M120 116 V130 M96 132 H144" fill="none" stroke="#E6EAF0" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.0 -2.0)"/></g><g filter="url(#ds)"><rect x="46" y="19" width="148" height="102" rx="16" fill="var(--ill-panel-edge)"/><rect x="46" y="14" width="148" height="102" rx="16" fill="var(--ill-monitor)"/><rect x="52" y="18" width="136" height="6" rx="3" fill="var(--ill-shine)"/><rect x="56" y="24" width="128" height="80" rx="10" fill="url(#screen)"/></g><g ><path d="M78 46 L96 62 L78 78" fill="none" stroke="#B86A00" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M78 46 L96 62 L78 78" fill="none" stroke="#F59A0C" stroke-width="7.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.9 -0.9)"/><path d="M78 46 L96 62 L78 78" fill="none" stroke="#FFD98A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.2 -2.2)"/></g><g ><path d="M108 80 H140" fill="none" stroke="#17773F" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M108 80 H140" fill="none" stroke="#2FB36C" stroke-width="7.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.9 -0.9)"/><path d="M108 80 H140" fill="none" stroke="#9BE8BE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-2.2 -2.2)"/></g><circle cx="196" cy="40" r="8" fill="url(#ball-bl)"/></svg><!--/art--></div>
+          <span class="tag hot">ЕГЭ и ОГЭ</span>
+          <h3>Информатика</h3>
+          <ul>
+            <li>Курс на каждое задание экзамена</li>
+            <li>Основы Python</li>
+            <li>Электронные таблицы LibreOffice Calc</li>
+            <li>Поиск информации в базах данных</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="art"><!--art:phys--><svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="Модель атома"><ellipse cx="120" cy="140" rx="70" ry="9.8" fill="#000" opacity=".13" filter="url(#blur)"/><g transform="rotate(0 120 74)"><g ><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#5A31B0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#8E5CF0" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.7 -0.7)"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#D6C2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.8 -1.8)"/></g></g><g transform="rotate(60 120 74)"><g ><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#5A31B0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#8E5CF0" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.7 -0.7)"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#D6C2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.8 -1.8)"/></g></g><g transform="rotate(120 120 74)"><g ><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#5A31B0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#8E5CF0" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.7 -0.7)"/><path d="M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0" fill="none" stroke="#D6C2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate(-1.8 -1.8)"/></g></g><circle cx="120" cy="74" r="17" fill="url(#ball-or)"/><circle cx="188" cy="74" r="7" fill="url(#ball-bl)"/><circle cx="86" cy="133" r="7" fill="url(#ball-bl)"/><circle cx="86" cy="15" r="7" fill="url(#ball-bl)"/></svg><!--/art--></div>
+          <span class="tag">Скоро</span>
+          <h3>Физика</h3>
+          <ul>
+            <li>ОГЭ: курсы по разделам физики</li>
+            <li>Измерения и эксперимент</li>
+            <li>Качественные и расчётные задачи</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Как устроен курс</h2>
+        <p>Курс разбит на модули, модуль — на уроки. В каждом уроке — один приём, который нужен на экзамене.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Теория</h3>
+          <p>Короткое объяснение и разбор типовых задач — прототипов экзаменационных заданий.</p>
+        </div>
+        <div class="step">
+          <h3>Тренировочная работа</h3>
+          <p>Задачи того же типа с другими данными: закрепляем приём сразу после урока.</p>
+        </div>
+        <div class="step">
+          <h3>Тест модуля</h3>
+          <p>Новые задачи, которых не было в уроках, — проверка, что тема действительно освоена.</p>
+        </div>
+        <div class="step">
+          <h3>Пробный вариант</h3>
+          <p>Полный вариант в формате экзамена с пересчётом в тестовые баллы.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Форматы занятий</h2>
+        <p>Выберите необходимый уровень поддержки. Стоимость и подробности — по запросу.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card plan">
+          <span class="tag">Самостоятельно</span>
+          <h3>Курс</h3>
+          <p>Доступ к материалам курса по подписке.</p>
+          <ul>
+            <li>Теория и разобранные примеры</li>
+            <li>Тренировочные работы и тесты</li>
+            <li>Ответы для самопроверки</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Узнать подробнее</a>
+        </article>
+        <article class="card plan featured">
+          <span class="tag hot">С преподавателем</span>
+          <h3>Курс с сопровождением</h3>
+          <p>Те же материалы плюс внимание преподавателя.</p>
+          <ul>
+            <li>Проверка работ и разбор ошибок</li>
+            <li>Домашние задания по слабым темам</li>
+            <li>Пробные варианты с оценкой</li>
+          </ul>
+          <a class="btn btn-primary" href="#contact">Узнать подробнее</a>
+        </article>
+        <article class="card plan">
+          <span class="tag">Один на один</span>
+          <h3>Индивидуальные занятия</h3>
+          <p>Онлайн-занятия по вашему плану подготовки.</p>
+          <ul>
+            <li>Занятия на интерактивной доске</li>
+            <li>Задачи не повторяются</li>
+            <li>Все материалы курсов в работе</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Записаться</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="card">
+        <h2>Напишите нам</h2>
+        <p>Расскажите, к какому экзамену готовитесь и сколько осталось времени, — подскажем, с чего начать.</p>
+        <a class="mail" href="#contact" data-mail>hello [at] yourclass.online</a>
+        <a class="btn btn-primary" href="#contact" data-mail data-subject="Вопрос с сайта" data-keep-text>Написать</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2024–<span id="y">2026</span> yourClass.online</span>
+    <a href="#contact" data-mail>hello [at] yourclass.online</a>
+  </div>
+</footer>
+
+<dialog id="login" aria-labelledby="login-title">
+  <div class="dlg">
+    <button class="close" type="button" aria-label="Закрыть" data-close-login>&times;</button>
+    <img src="logo.svg" alt="" width="30" height="40">
+    <h2 id="login-title">Вход для учеников</h2>
+    <p class="sub">Личный кабинет с курсами, работами и результатами.</p>
+    <form id="login-form" autocomplete="off" novalidate>
+      <label class="field"><span>Логин</span><input name="u" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+      <label class="field"><span>Пароль</span><input name="p" type="password" autocomplete="off"></label>
+      <button class="btn btn-primary" type="submit">Войти</button>
+    </form>
+    <div class="notice" id="login-notice" role="status">Личный кабинет скоро откроется. Пока все материалы приходят как обычно — от преподавателя и через Telegram-бот.</div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  // Адрес собирается в браузере: целиком в коде страницы его нет (защита от сборщиков адресов).
+  var m=['hello','yourclass','online'], addr=m[0]+'\u0040'+m[1]+'.'+m[2];
+  document.querySelectorAll('[data-mail]').forEach(function(a){
+    var subj=a.getAttribute('data-subject');
+    a.href='mai'+'lto:'+addr+(subj?'?subject='+encodeURIComponent(subj):'');
+    if(!a.hasAttribute('data-keep-text')) a.textContent=addr;
+  });
+  var y=document.getElementById('y'); if(y) y.textContent=new Date().getFullYear();
+  var dlg=document.getElementById('login'), form=document.getElementById('login-form'),
+      note=document.getElementById('login-notice');
+  function open(){ note.classList.remove('show'); form.reset();
+    if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+    var f=form.querySelector('input'); if(f) f.focus(); }
+  function close(){ form.reset(); if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+  document.querySelectorAll('[data-open-login]').forEach(function(b){ b.addEventListener('click',open); });
+  document.querySelectorAll('[data-close-login]').forEach(function(b){ b.addEventListener('click',close); });
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });
+  // Введённые данные никуда не отправляются и не сохраняются: форма просто очищается.
+  form.addEventListener('submit',function(e){ e.preventDefault(); form.reset(); note.classList.add('show'); });
+})();
+</script>
+</body>
+</html>
