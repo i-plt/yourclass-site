@@ -1,11 +1,11 @@
 """Генерирует «объёмные» SVG-иллюстрации для карточек курсов и вставляет их в index.html."""
 import re, pathlib
 C = {  # base, dark, light
- 'or': ('#F59A0C', '#B86A00', '#FFD98A'),
+ 'or': ('#FF8A00', '#B35500', '#FFD199'),
  'bl': ('#4C6EF5', '#2A3FA8', '#B3C3FF'),
- 'gr': ('#2FB36C', '#17773F', '#9BE8BE'),
+ 'gr': ('#00B39F', '#0A7D70', '#7FE2D3'),
  'pu': ('#8E5CF0', '#5A31B0', '#D6C2FF'),
- 'gy': ('#9AA3B2', '#626B7A', '#E6EAF0'),
+ 'gy': ('#9FB4BB', '#4D6670', '#E8F3F1'),
 }
 def tube(d, c, w, extra=''):
     b, dk, lt = C[c]; o = w * .17
@@ -25,7 +25,7 @@ defs = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><
     f'<radialGradient id="ball-{k}" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="{v[2]}"/><stop offset=".45" stop-color="{v[0]}"/><stop offset="1" stop-color="{v[1]}"/></radialGradient>'
     for k, v in C.items()) + (
     '<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ill-panel-top)"/><stop offset="1" stop-color="var(--ill-panel)"/></linearGradient>'
-    '<linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c3a5e"/><stop offset="1" stop-color="#151d33"/></linearGradient>'
+    '<linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17404b"/><stop offset="1" stop-color="#0b1d24"/></linearGradient>'
     '<filter id="blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="4"/></filter>'
     '<filter id="ds" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".18"/></filter>'
     '</defs></svg>')
