@@ -13,13 +13,14 @@
 <meta property="og:image" content="https://yourclass.online/og-image.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#0e1c21" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f5fbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#f5fbfa">
+<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme:light;
   --bg:#f5fbfa; --bg-alt:#e8f3f1; --surface:#ffffff; --text:#0f2e3a; --muted:#4d6670;
   --line:#d5e8e4; --brand:#00b39f; --brand-strong:#0a7d70; --brand-hover:#009e8c; --brand-soft:#dcf7f2;
   --on-brand:#0f2e3a; --press:#0a7d70; --accent:#ff8a00; --accent-strong:#b35500; --accent-soft:#ffe8cc;
@@ -28,17 +29,6 @@
   --radius:20px; --max:1120px;
   --ill-desk:#e3d5bd; --ill-laptop:#c9d6d4; --ill-laptop-edge:#a9bcb9; --ill-hoodie:#4c6ef5; --ill-hoodie-dark:#2a3fa8;
   --ill-panel:#e8f3f1; --ill-panel-top:#ffffff; --ill-panel-edge:#c4dcd7; --ill-monitor:#d5e8e4; --ill-shine:rgba(255,255,255,.4);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e1c21; --bg-alt:#13232a; --surface:#182b33; --text:#e8f3f1; --muted:#9fb4bb;
-    --line:#24404a; --brand:#2fd6bf; --brand-strong:#2fd6bf; --brand-hover:#7fe2d3; --brand-soft:#103631;
-    --on-brand:#0f2e3a; --press:#0a7d70; --accent:#ffa940; --accent-strong:#ffa940; --accent-soft:#3a2a12;
-    --logo-a:#ffa940; --logo-b:#ffa940; --logo-chk:#2fd6bf;
-    --shadow:none;
-    --ill-desk:#34444a; --ill-laptop:#4f6670; --ill-laptop-edge:#3d525b; --ill-hoodie:#5c7cfa; --ill-hoodie-dark:#4263eb;
-    --ill-panel:#1e3540; --ill-panel-top:#284450; --ill-panel-edge:#0b161a; --ill-monitor:#2a4652; --ill-shine:rgba(255,255,255,.06);
-  }
 }
 :root[data-theme="dark"]{
   --bg:#0e1c21; --bg-alt:#13232a; --surface:#182b33; --text:#e8f3f1; --muted:#9fb4bb;
@@ -215,7 +205,7 @@ dialog::backdrop{background:rgba(10,12,16,.55); backdrop-filter:blur(3px)}
     <div class="wrap">
       <div>
         <span class="eyebrow">ЕГЭ и ОГЭ · онлайн</span>
-        <h1>Подготовка к экзамену — по шагам, от теории до пробных вариантов на основе реальных экзаменов</h1>
+        <h1>Подготовка к экзамену&nbsp;— по&nbsp;шагам, от теории до пробных вариантов на основе реальных экзаменов</h1>
         <p class="lead">Курсы по заданиям ЕГЭ и ОГЭ по математике и информатике: понятная теория с разобранными примерами, тренировочные работы, тесты и пробные варианты. Самостоятельно, с сопровождением или на индивидуальных занятиях.</p>
         <div class="cta">
           <a class="btn btn-primary" href="#contact">Написать нам</a>
