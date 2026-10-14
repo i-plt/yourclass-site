@@ -83,22 +83,35 @@ nav.links a:hover{color:var(--text)}
 
 /* hero */
 .hero{padding:96px 0 80px; position:relative; overflow:hidden}
-.hero .wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
+.hero .wrap{display:grid; grid-template-columns:1fr 1fr; column-gap:48px; align-items:start}
+/* левая колонка раскладывается по строкам сетки: фото занимает строки заголовка и абзаца */
+.hero .wrap > div:first-child{display:contents}
+.hero .eyebrow,.hero h1,.hero p.lead,.hero .cta{grid-column:1; position:relative; z-index:1}
+.hero .eyebrow{justify-self:start}
+.hero .cta{margin-top:32px}
 .eyebrow{display:inline-block; padding:6px 12px; border-radius:999px; background:var(--brand-soft);
   color:var(--brand-strong); font-weight:600; font-size:14px; margin-bottom:20px}
-.hero p.lead{font-size:clamp(18px,2vw,21px); color:var(--muted); margin:22px 0 32px; max-width:34em}
+.hero p.lead{font-size:clamp(18px,2vw,21px); color:var(--muted); margin:22px 0 0; max-width:34em}
 .cta{display:flex; flex-wrap:wrap; gap:12px}
-.hero-art{justify-self:center; width:100%; max-width:480px; height:auto; overflow:visible}
+.hero-photo{position:relative; margin:0; grid-column:2; grid-row:2 / 4; align-self:stretch}
+/* на широком экране высота фото = высоте левой колонки; лишнее уходит вправо (не дальше 80 px за колонку) */
+.ph{position:absolute; top:0; bottom:0; right:calc(-1 * min(80px, (100vw - min(100vw, var(--max))) / 2 + 24px)); aspect-ratio:960/735}
+.ph img{display:block; width:100%; height:100%}
+.chip{position:absolute; background:var(--surface); border:1px solid var(--line); border-radius:14px}
+.chip.code{top:10%; right:9%; padding:12px 16px; font:15px/1 Menlo,Consolas,monospace; color:var(--text)}
+.chip .kw{color:var(--brand-strong)} .chip .str{color:var(--accent-strong)}
+.chip.ok{top:46%; right:12%; width:48px; height:48px; border:0; background:none}
 .float{animation:bob 6s ease-in-out infinite}
 .f2{animation-delay:-2s}.f3{animation-delay:-4s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.wave{transform-box:view-box; transform-origin:184px 302px; animation:wave 2.4s ease-in-out infinite}
-@keyframes wave{0%,40%,100%{transform:rotate(0)}10%,30%{transform:rotate(-8deg)}20%{transform:rotate(4deg)}}
-@media (prefers-reduced-motion:reduce){.float,.wave{animation:none}}
+@media (prefers-reduced-motion:reduce){.float{animation:none}}
 @media (max-width:860px){
   .hero{padding:48px 0 56px}
-  .hero .wrap{grid-template-columns:1fr; gap:32px}
-  .hero-art{max-width:380px}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-photo{grid-column:1; grid-row:auto; margin-top:32px; max-width:520px; justify-self:center; width:100%}
+  .ph{position:relative; right:auto; top:auto; bottom:auto; width:100%}
+  .chip.code{top:3%; right:4%; padding:9px 12px; font-size:13px}
+  .chip.ok{right:6%}
 }
 
 /* sections */
@@ -204,78 +217,13 @@ dialog::backdrop{background:rgba(10,12,16,.55); backdrop-filter:blur(3px)}
           <a class="btn btn-primary btn-white" href="#courses">Посмотреть курсы</a>
         </div>
       </div>
-      <svg class="hero-art" viewBox="0 0 480 440" role="img" aria-label="Ученик занимается за ноутбуком">
-        <defs>
-        </defs>
-        <circle cx="240" cy="236" r="178" fill="var(--brand-soft)"/>
-        <circle cx="96" cy="86" r="5" fill="var(--brand)"/>
-        <circle cx="430" cy="290" r="6" fill="var(--brand)" opacity=".6"/>
-        <path d="M310 150 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z" fill="var(--accent)"/>
-        <!-- стол -->
-        <rect x="36" y="362" width="408" height="14" rx="7" fill="var(--ill-desk)"/>
-        <!-- растение -->
-        <ellipse cx="78" cy="300" rx="11" ry="26" fill="#3fae7a" transform="rotate(-25 78 300)"/>
-        <ellipse cx="100" cy="294" rx="11" ry="28" fill="#2f9a68" transform="rotate(18 100 294)"/>
-        <ellipse cx="89" cy="288" rx="10" ry="30" fill="#46bf86"/>
-        <path d="M70 322 H108 L102 362 H76 Z" fill="#d9784f"/>
-        <!-- кружка -->
-        <path d="M398 332 a12 12 0 0 1 0 22" fill="none" stroke="var(--accent-strong)" stroke-width="5"/>
-        <rect x="368" y="324" width="32" height="38" rx="6" fill="var(--accent)"/>
-        <path d="M378 312 q-6 -8 0 -16 M390 312 q-6 -8 0 -16" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" opacity=".5"/>
-        <!-- ученик -->
-        <!-- поднятая рука машет -->
-        <g class="wave">
-        <path d="M184 302 Q164 272 152 240" fill="none" stroke="var(--ill-hoodie)" stroke-width="24" stroke-linecap="round"/>
-        <path d="M155 248 L150 236" stroke="var(--ill-hoodie-dark)" stroke-width="24" stroke-linecap="round"/>
-        <g stroke="#f2c5a0" stroke-width="7.5" stroke-linecap="round">
-          <path d="M138 208 L134 192"/><path d="M144 205 L143 187"/><path d="M151 205 L152 188"/><path d="M157 209 L161 195"/><path d="M158 222 L168 214"/>
-        </g>
-        <ellipse cx="147" cy="217" rx="13" ry="14" fill="#f2c5a0"/>
-        </g>
-        <path d="M156 362 C156 300 184 262 240 262 C296 262 324 300 324 362 Z" fill="var(--ill-hoodie)"/>
-        <rect x="228" y="236" width="24" height="30" rx="8" fill="#e8b48e"/>
-        <path d="M204 272 C212 252 268 252 276 272 C262 263 218 263 204 272 Z" fill="var(--ill-hoodie-dark)"/>
-        <!-- голова -->
-        <circle cx="196" cy="206" r="10" fill="#f2c5a0"/>
-        <circle cx="284" cy="206" r="10" fill="#f2c5a0"/>
-        <ellipse cx="240" cy="200" rx="44" ry="48" fill="#f2c5a0"/>
-        <path d="M194 206 C184 152 218 134 244 136 C276 138 298 160 286 206 C282 190 276 180 268 174 C252 190 226 196 208 190 C202 194 197 200 194 206 Z" fill="#2b2118"/>
-        <path d="M236 142 C244 126 262 126 266 134 C256 134 248 138 244 146 Z" fill="#2b2118"/>
-        <!-- лицо -->
-        <ellipse cx="223" cy="205" rx="7" ry="8.5" fill="#fff"/>
-        <ellipse cx="257" cy="205" rx="7" ry="8.5" fill="#fff"/>
-        <circle cx="224" cy="206" r="4.4" fill="#1f2430"/>
-        <circle cx="258" cy="206" r="4.4" fill="#1f2430"/>
-        <circle cx="225.6" cy="204.2" r="1.5" fill="#fff"/>
-        <circle cx="259.6" cy="204.2" r="1.5" fill="#fff"/>
-        <circle cx="213" cy="223" r="7" fill="#f4a38a" opacity=".55"/>
-        <circle cx="267" cy="223" r="7" fill="#f4a38a" opacity=".55"/>
-        <g fill="#c98c6a" opacity=".75"><circle cx="209" cy="219" r="1.3"/><circle cx="214" cy="216" r="1.3"/><circle cx="216" cy="221" r="1.3"/><circle cx="271" cy="219" r="1.3"/><circle cx="266" cy="216" r="1.3"/><circle cx="264" cy="221" r="1.3"/></g>
-        <path d="M229 228 Q240 237 251 228" fill="none" stroke="#1f2430" stroke-width="3" stroke-linecap="round"/>
-        <!-- ноутбук -->
-        <rect x="156" y="274" width="168" height="88" rx="9" fill="var(--ill-laptop)"/>
-        <path d="M232 300 V322 L252 311 Z" fill="var(--accent)" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M230 331 L236 336 L253 325" fill="none" stroke="var(--logo-chk)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="132" y="356" width="216" height="10" rx="5" fill="var(--ill-laptop-edge)"/>
-        <circle cx="320" cy="346" r="11" fill="#f2c5a0"/>
-        <!-- карточки -->
-        <g class="float f1">
-          <rect x="40" y="108" width="124" height="54" rx="14" fill="var(--surface)" stroke="var(--line)"/>
-          <text x="102" y="142" text-anchor="middle" font-family="'STIX Two Math','Cambria Math',Georgia,serif" font-style="italic" font-size="21" fill="var(--text)">f′(x) = 2x</text>
-        </g>
-        <g class="float f2">
-          <rect x="312" y="78" width="152" height="54" rx="14" fill="var(--surface)" stroke="var(--line)"/>
-          <text x="388" y="111" text-anchor="middle" font-family="Menlo,Consolas,monospace" font-size="15" fill="var(--text)"><tspan fill="var(--brand-strong)">print</tspan>(<tspan fill="var(--accent-strong)">'Готов!'</tspan>)</text>
-        </g>
-        <g class="float f3">
-          <circle cx="410" cy="206" r="24" fill="var(--brand)"/>
-          <path d="M399 206 l8 8 15 -16" fill="none" stroke="var(--on-brand)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-        </g>
-        <g class="float f2">
-          <rect x="34" y="200" width="82" height="44" rx="12" fill="var(--surface)" stroke="var(--line)"/>
-          <text x="75" y="229" text-anchor="middle" font-family="'STIX Two Math','Cambria Math',Georgia,serif" font-size="19" fill="var(--text)"><tspan font-style="italic">x</tspan>² ⩾ 0</text>
-        </g>
-      </svg>
+      <figure class="hero-photo">
+        <div class="ph">
+          <img src="teacher.webp?v=2" width="960" height="735" alt="Преподаватель пишет формулу производной" fetchpriority="high">
+          <div class="chip code float f2"><span class="kw">print</span>(<span class="str">'Готов!'</span>)</div>
+          <div class="chip ok float f3" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="var(--brand)"/><path d="M13 24l8 8 15-16" fill="none" stroke="var(--on-brand)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+      </figure>
     </div>
   </section>
 
