@@ -1,67 +1,69 @@
-"""Генерирует «объёмные» SVG-иллюстрации для карточек курсов и вставляет их в index.html."""
+"""Плоские цветные иконки для карточек курсов (Minimal UI) — вставляются в index.html."""
 import re, pathlib
-C = {  # base, dark, light
- 'or': ('#FF8A00', '#B35500', '#FFD199'),
- 'bl': ('#4C6EF5', '#2A3FA8', '#B3C3FF'),
- 'gr': ('#00B39F', '#0A7D70', '#7FE2D3'),
- 'pu': ('#8E5CF0', '#5A31B0', '#D6C2FF'),
- 'gy': ('#9FB4BB', '#4D6670', '#E8F3F1'),
-}
-def tube(d, c, w, extra=''):
-    b, dk, lt = C[c]; o = w * .17
-    return (f'<g {extra}><path d="{d}" fill="none" stroke="{dk}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>'
-            f'<path d="{d}" fill="none" stroke="{b}" stroke-width="{w*.78:.1f}" stroke-linecap="round" stroke-linejoin="round" transform="translate({-o*.5:.1f} {-o*.5:.1f})"/>'
-            f'<path d="{d}" fill="none" stroke="{lt}" stroke-width="{w*.22:.1f}" stroke-linecap="round" stroke-linejoin="round" opacity=".85" transform="translate({-o*1.3:.1f} {-o*1.3:.1f})"/></g>')
-def ball(x, y, r, c):
-    return f'<circle cx="{x}" cy="{y}" r="{r}" fill="url(#ball-{c})"/>'
-def ground(x, y, rx):
-    return f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{rx*.14:.1f}" fill="#000" opacity=".13" filter="url(#blur)"/>'
-def panel(x, y, w, h, r=16, fill='url(#panel)'):
-    return (f'<rect x="{x}" y="{y+5}" width="{w}" height="{h}" rx="{r}" fill="var(--ill-panel-edge)"/>'
-            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}"/>'
-            f'<rect x="{x+6}" y="{y+4}" width="{w-12}" height="6" rx="3" fill="var(--ill-shine)"/>')
-
-defs = '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>' + ''.join(
-    f'<radialGradient id="ball-{k}" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="{v[2]}"/><stop offset=".45" stop-color="{v[0]}"/><stop offset="1" stop-color="{v[1]}"/></radialGradient>'
-    for k, v in C.items()) + (
-    '<linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ill-panel-top)"/><stop offset="1" stop-color="var(--ill-panel)"/></linearGradient>'
-    '<linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17404b"/><stop offset="1" stop-color="#0b1d24"/></linearGradient>'
-    '<filter id="blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="4"/></filter>'
-    '<filter id="ds" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".18"/></filter>'
-    '</defs></svg>')
-
+OR, BL, GR, PU = '#ff8a00', '#4c6ef5', '#00b39f', '#8e5cf0'
+INK = 'var(--text)'
 def svg(body, label):
     return f'<svg class="card-art" viewBox="0 0 240 150" role="img" aria-label="{label}">{body}</svg>'
+def card(x, y, w, h, r=14):
+    return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>'
+def grid(x, y, w, h, step):
+    g = ''.join(f'<path d="M{x+i} {y}V{y+h}"/>' for i in range(step, w, step)) + ''.join(f'<path d="M{x} {y+j}H{x+w}"/>' for j in range(step, h, step))
+    return f'<g stroke="var(--line)" stroke-width="1.5">{g}</g>'
+def dot(x, y, r, c, ring=True):
+    return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{c}"' + (' stroke="var(--surface)" stroke-width="2.5"' if ring else '') + '/>'
+def line(d, c, w=4):
+    return f'<path d="{d}" fill="none" stroke="{c}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>'
 
-# ЕГЭ профиль: график параболы с касательной
-prof = svg(ground(120, 138, 92) + f'<g filter="url(#ds)">{panel(36, 14, 168, 116)}</g>'
-    + tube('M58 112 H186', 'gy', 5) + tube('M70 122 V30', 'gy', 5)
-    + tube('M78 40 Q122 150 170 42', 'or', 13)
-    + tube('M107 111 L175 65', 'bl', 8)
-    + ball(137, 91, 9, 'bl'), 'График функции и касательная')
-# ЕГЭ база: знак процента и монеты
-base = svg(ground(120, 138, 90)
-    + tube('M146 34 L96 122', 'or', 16)
-    + tube('M84 54 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0', 'bl', 12)
-    + tube('M158 104 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0', 'bl', 12)
-    + ball(196, 120, 12, 'gr') + ball(46, 116, 9, 'or'), 'Знак процента')
-# ОГЭ: треугольник со вписанной окружностью
-oge = svg(ground(120, 140, 80)
-    + tube('M60 126 L180 126 L120 22 Z', 'gr', 11)
-    + tube('M120 92 m-31 0 a31 31 0 1 0 62 0 a31 31 0 1 0 -62 0', 'or', 9)
-    + ball(120, 92, 6, 'bl') + ball(196, 46, 9, 'bl') + ball(42, 70, 7, 'or'), 'Треугольник со вписанной окружностью')
-# Информатика: монитор с командной строкой
-inf = svg(ground(120, 140, 80) + tube('M120 116 V130 M96 132 H144', 'gy', 9)
-    + f'<g filter="url(#ds)">{panel(46, 14, 148, 102, 16, "var(--ill-monitor)")}<rect x="56" y="24" width="128" height="80" rx="10" fill="url(#screen)"/></g>'
-    + tube('M78 46 L96 62 L78 78', 'or', 10) + tube('M108 80 H140', 'gr', 10)
-    + ball(196, 40, 8, 'bl'), 'Монитор с командной строкой')
+# ЕГЭ профиль: график параболы и точная касательная
+import math
+P0, P1, P2 = (84, 38), (122, 150), (164, 38)
+def bez(t): return tuple((1-t)**2*P0[i] + 2*t*(1-t)*P1[i] + t*t*P2[i] for i in (0, 1))
+def dbez(t): return tuple(2*(1-t)*(P1[i]-P0[i]) + 2*t*(P2[i]-P1[i]) for i in (0, 1))
+t0 = .68; (tx, ty), (dx, dy) = bez(t0), dbez(t0); n = math.hypot(dx, dy); dx, dy = dx/n, dy/n
+prof = svg(card(30, 12, 180, 126) + grid(46, 26, 148, 98, 18)
+    + line('M58 112H188', INK, 2.5) + line('M70 118V30', INK, 2.5)
+    + line('M84 38Q122 150 164 38', OR, 5)
+    + line(f'M{tx-dx*34:.1f} {ty-dy*34:.1f}L{tx+dx*40:.1f} {ty+dy*40:.1f}', BL, 4)
+    + dot(round(tx, 1), round(ty, 1), 6, BL),
+    'График функции и касательная')
+# ЕГЭ база: столбики диаграммы по центру, знак процента слева
+base = svg(card(30, 12, 180, 126)
+    + '<rect x="84" y="82" width="26" height="40" rx="6" fill="' + BL + '"/>'
+    + '<rect x="118" y="58" width="26" height="64" rx="6" fill="' + GR + '"/>'
+    + '<rect x="152" y="40" width="26" height="82" rx="6" fill="' + OR + '"/>'
+    + line('M74 124H188', INK, 2.5)
+    + f'<circle cx="58" cy="44" r="18" fill="{PU}"/>'
+    + line('M65 37L51 51', '#fff', 3.5) + '<circle cx="52" cy="38" r="3" fill="#fff"/><circle cx="64" cy="50" r="3" fill="#fff"/>',
+    'Диаграмма и знак процента')
+# ОГЭ: треугольник в узлах клетки, вписанная окружность (центр и радиус посчитаны)
+A, B, Cc = (58, 110), (184, 110), (142, 40)
+la, lb, lc = math.dist(B, Cc), math.dist(A, Cc), math.dist(A, B); per = la + lb + lc
+ix = (la*A[0] + lb*B[0] + lc*Cc[0]) / per; iy = (la*A[1] + lb*B[1] + lc*Cc[1]) / per
+s_ = per / 2; area = abs((B[0]-A[0])*(Cc[1]-A[1]) - (Cc[0]-A[0])*(B[1]-A[1])) / 2; r_in = area / s_
+rc = r_in - 3.5  # кольцо касается внутреннего края линии треугольника
+oge = svg(card(30, 12, 180, 126) + grid(44, 26, 152, 98, 14)
+    + f'<path d="M{A[0]} {A[1]}L{B[0]} {B[1]}L{Cc[0]} {Cc[1]}Z" fill="{GR}" fill-opacity=".14" stroke="{GR}" stroke-width="5" stroke-linejoin="round"/>'
+    + f'<circle cx="{ix:.1f}" cy="{iy:.1f}" r="{rc:.1f}" fill="{OR}" fill-opacity=".18" stroke="{OR}" stroke-width="4"/>'
+    + dot(round(ix, 1), round(iy, 1), 4, OR, False) + dot(*A, 6, BL) + dot(*B, 6, BL) + dot(*Cc, 6, BL),
+    'Треугольник со вписанной окружностью на клетчатой бумаге')
+# Информатика: окно терминала и таблица
+inf = svg(card(24, 14, 150, 104)
+    + f'<path d="M24 40H174V28a14 14 0 0 0 -14 -14H38a14 14 0 0 0 -14 14Z" fill="{BL}"/>'
+    + dot(40, 27, 3.5, '#fff', False) + dot(52, 27, 3.5, '#fff', False) + dot(64, 27, 3.5, '#fff', False)
+    + line('M42 58L58 70L42 82', OR, 5) + line('M68 84H112', GR, 5) + line('M68 100H96', INK, 3.5)
+    + card(132, 62, 84, 72, 10)
+    + f'<path d="M132 72a10 10 0 0 1 10 -10H206a10 10 0 0 1 10 10V80H132Z" fill="{GR}"/>'
+    + '<g stroke="var(--line)" stroke-width="2"><path d="M160 80V134M188 80V134M132 102H216M132 118H216"/></g>'
+    + f'<rect x="164" y="104" width="20" height="12" rx="3" fill="{OR}"/>',
+    'Окно терминала и электронная таблица')
 # Физика: атом
-atom = ''.join(f'<g transform="rotate({a} 120 74)">' + tube('M120 74 m-68 0 a68 24 0 1 0 136 0 a68 24 0 1 0 -136 0', 'pu', 8) + '</g>' for a in (0, 60, 120))
-phys = svg(ground(120, 140, 70) + atom + ball(120, 74, 17, 'or') + ball(188, 74, 7, 'bl') + ball(86, 133, 7, 'bl') + ball(86, 15, 7, 'bl'), 'Модель атома')
+orb = ''.join(f'<ellipse cx="120" cy="74" rx="66" ry="24" fill="none" stroke="{PU}" stroke-width="4" transform="rotate({a} 120 74)"/>' for a in (0, 60, 120))
+phys = svg(f'<circle cx="120" cy="74" r="62" fill="var(--bg)"/>' + orb + dot(120, 74, 15, OR) + dot(186, 74, 7, BL) + dot(87, 131, 7, BL) + dot(87, 17, 7, GR),
+    'Модель атома')
 
 p = pathlib.Path(__file__).resolve().parent.parent / 'index.html'
 s = p.read_text()
-for key, art in {'prof': prof, 'base': base, 'oge': oge, 'inf': inf, 'phys': phys, 'defs': defs}.items():
+for key, art in {'prof': prof, 'base': base, 'oge': oge, 'inf': inf, 'phys': phys, 'defs': ''}.items():
     s = re.sub(rf'<!--art:{key}-->.*?<!--/art-->', f'<!--art:{key}-->{art}<!--/art-->', s, flags=re.S)
 p.write_text(s)
 print('ok')
