@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Интерактивные чертежи — проба</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;700&family=Nunito:wght@900&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/jsxgraph-1.13.3/jsxgraph.css">
+<link rel="stylesheet" href="figures.css">
+<style>
+:root{ --bg:#f5fbfa; --text:#0f2e3a; --muted:#4d6670; --line:#d5e8e4; --surface:#ffffff; --brand:#0a7d70 }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0e1c21; --text:#e8f3f1; --muted:#9fb4bb; --line:#24404a; --surface:#182b33; --brand:#2fd6bf } }
+:root[data-theme="dark"]{ --bg:#0e1c21; --text:#e8f3f1; --muted:#9fb4bb; --line:#24404a; --surface:#182b33; --brand:#2fd6bf }
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--text); font:400 16px/1.6 "Golos Text",system-ui,-apple-system,sans-serif; -webkit-text-size-adjust:100%}
+.wrap{max-width:720px; margin:0 auto; padding:24px 16px 64px}
+header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px}
+.brand{font:900 18px/1 Nunito,"Golos Text",sans-serif; color:var(--brand); text-decoration:none}
+.theme{min-height:40px; padding:0 14px; border-radius:12px; border:1.5px solid var(--line); background:var(--surface); color:var(--text); font:600 14px/1 inherit; font-family:inherit; cursor:pointer}
+h1{font:900 clamp(26px,6vw,36px)/1.15 Nunito,"Golos Text",sans-serif; margin:16px 0 8px}
+h2{font:900 22px/1.25 Nunito,"Golos Text",sans-serif; margin:0 0 6px}
+.lead{color:var(--muted); margin:0 0 32px}
+section{margin:0 0 48px}
+.task{margin:0 0 14px; color:var(--muted)}
+.task .m{font-family:"STIX Two Text",serif; font-size:17px; color:var(--text); white-space:nowrap}
+.task .m i{font-style:italic}
+footer{color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="../">yourClass.online</a>
+    <button class="theme" id="theme" type="button">Тема: авто</button>
+  </header>
+  <h1>Интерактивные чертежи</h1>
+  <p class="lead">Черновая проба: три типа чертежей для уроков и разборов. Страница скрыта от поиска.</p>
+
+  <section>
+    <h2>1. Вращение тела</h2>
+    <p class="task">Правильная четырёхугольная пирамида <span class="m"><i>SABCD</i></span>, <span class="m"><i>SO</i></span> — высота. Поверните ползунком: невидимые линии рисуются пунктиром.</p>
+    <figure id="fig-pyramid"></figure>
+  </section>
+
+  <section>
+    <h2>2. Построение по шагам</h2>
+    <p class="task">Постройте сечение куба <span class="m"><i>ABCDA</i>₁<i>B</i>₁<i>C</i>₁<i>D</i>₁</span> плоскостью, проходящей через точки <span class="m"><i>K</i></span>, <span class="m"><i>L</i></span>, <span class="m"><i>M</i></span> на рёбрах <span class="m"><i>AA</i>₁</span>, <span class="m"><i>BB</i>₁</span>, <span class="m"><i>CC</i>₁</span>.</p>
+    <figure id="fig-section"></figure>
+  </section>
+
+  <section>
+    <h2>3. Задача с параметром</h2>
+    <p class="task">При каких <span class="m"><i>a</i></span> уравнение <span class="m">|<i>x</i>² − 4| = <i>a</i></span> имеет ровно три решения? Двигайте ползунок или оранжевую ручку справа.</p>
+    <figure id="fig-param"></figure>
+  </section>
+
+  <footer>Проба движка: JSXGraph 1.13.3 (MIT/LGPL) + свой проигрыватель figures.js.</footer>
+</div>
+
+<script src="vendor/jsxgraph-1.13.3/jsxgraphcore.js"></script>
+<script src="figures.js"></script>
+<script>
+// Переключатель темы: авто → светлая → тёмная
+(function () {
+  var modes = ['auto', 'light', 'dark'], names = { auto: 'авто', light: 'светлая', dark: 'тёмная' };
+  var btn = document.getElementById('theme'), mode = 'auto';
+  try { mode = localStorage.getItem('ycf-theme') || 'auto'; } catch (e) {}
+  function apply() {
+    if (mode === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', mode);
+    btn.textContent = 'Тема: ' + names[mode];
+  }
+  btn.addEventListener('click', function () {
+    mode = modes[(modes.indexOf(mode) + 1) % 3];
+    try { localStorage.setItem('ycf-theme', mode); } catch (e) {}
+    apply();
+  });
+  apply();
+})();
+
+// ---- Описания чертежей (JSON-совместимые) ----
+
+var pyramid = {
+  type: 'solid',
+  vertices: { A: [-2, -2, 0], B: [2, -2, 0], C: [2, 2, 0], D: [-2, 2, 0], S: [0, 0, 4.2] },
+  faces: [['A', 'B', 'C', 'D'], ['S', 'A', 'B'], ['S', 'B', 'C'], ['S', 'C', 'D'], ['S', 'D', 'A']],
+  points: { O: { mid: ['A', 'C'], label: [0.7, -1] } },
+  view: { azimuth: 25, elevation: 18 },
+  show: [{ aux: ['A', 'C'] }, { aux: ['B', 'D'] }, { seg: ['S', 'O'] }, { point: 'O' }]
+};
+
+var cube = {
+  type: 'solid',
+  vertices: {
+    A: [0, 0, 0], B: [4, 0, 0], C: [4, 4, 0], D: [0, 4, 0],
+    A1: [0, 0, 4], B1: [4, 0, 4], C1: [4, 4, 4], D1: [0, 4, 4]
+  },
+  faces: [['A', 'B', 'C', 'D'], ['A1', 'B1', 'C1', 'D1'], ['A', 'B', 'B1', 'A1'],
+          ['B', 'C', 'C1', 'B1'], ['C', 'D', 'D1', 'C1'], ['D', 'A', 'A1', 'D1']],
+  points: {
+    K: { on: ['A', 'A1', 0.75] }, L: { on: ['B', 'B1', 0.25] }, M: { on: ['C', 'C1', 0.75] },
+    X: { meet: [['K', 'L'], ['A1', 'B1']] }, Y: { meet: [['L', 'M'], ['B1', 'C1']] },
+    P: { meet: [['X', 'Y'], ['A1', 'D1']] }, Q: { meet: [['X', 'Y'], ['C1', 'D1']] }
+  },
+  view: { azimuth: 325, elevation: 20 },
+  steps: [
+    { caption: 'Даны точки <span class="m"><i>K</i> ∈ <i>AA</i>₁</span>, <span class="m"><i>L</i> ∈ <i>BB</i>₁</span>, <span class="m"><i>M</i> ∈ <i>CC</i>₁</span>. Строим сечение плоскостью <span class="m"><i>KLM</i></span>.',
+      items: [{ point: 'K' }, { point: 'L' }, { point: 'M' }] },
+    { caption: '<span class="m"><i>K</i></span> и <span class="m"><i>L</i></span> лежат в одной грани <span class="m"><i>ABB</i>₁<i>A</i>₁</span> — соединяем. Так же <span class="m"><i>L</i></span> и <span class="m"><i>M</i></span> в грани <span class="m"><i>BCC</i>₁<i>B</i>₁</span>.',
+      items: [{ seg: ['K', 'L'] }, { seg: ['L', 'M'] }] },
+    { caption: 'Продлим <span class="m"><i>KL</i></span> до пересечения с прямой <span class="m"><i>A</i>₁<i>B</i>₁</span> (обе в плоскости <span class="m"><i>ABB</i>₁</span>): получаем точку <span class="m"><i>X</i></span>.',
+      items: [{ aux: ['K', 'X'] }, { aux: ['A1', 'X'] }, { point: 'X' }] },
+    { caption: 'Продлим <span class="m"><i>LM</i></span> до пересечения с прямой <span class="m"><i>B</i>₁<i>C</i>₁</span>: точка <span class="m"><i>Y</i></span>.',
+      items: [{ aux: ['M', 'Y'] }, { aux: ['C1', 'Y'] }, { point: 'Y' }] },
+    { caption: '<span class="m"><i>X</i></span> и <span class="m"><i>Y</i></span> лежат и в секущей плоскости, и в плоскости верхней грани, значит <span class="m"><i>XY</i></span> — их общая прямая. Она пересекает <span class="m"><i>A</i>₁<i>D</i>₁</span> в точке <span class="m"><i>P</i></span>, а <span class="m"><i>D</i>₁<i>C</i>₁</span> — в точке <span class="m"><i>Q</i></span>.',
+      items: [{ aux: ['X', 'Y'] }, { point: 'P' }, { point: 'Q' }] },
+    { caption: 'Соединяем точки, лежащие в одной грани: <span class="m"><i>KP</i></span>, <span class="m"><i>PQ</i></span>, <span class="m"><i>QM</i></span>. Сечение — пятиугольник <span class="m"><i>KLMQP</i></span>.',
+      items: [{ seg: ['K', 'P'] }, { seg: ['P', 'Q'] }, { seg: ['Q', 'M'] }, { poly: ['K', 'L', 'M', 'Q', 'P'] }] }
+  ]
+};
+
+var param = {
+  type: 'plot',
+  bbox: [-4.4, 7, 4.4, -1.8],
+  curves: [{ fn: 'abs(x^2 - 4)', label: '<i>y</i> = |<i>x</i>² − 4|', at: [0.3, 6.2] }],
+  param: { name: 'a', min: -1, max: 6, step: 0.1, value: 2.5, lineLabel: '<i>y</i> = <i>a</i>' },
+  target: 3,
+  notes: [
+    { when: '<0', text: 'Левая часть неотрицательна — решений нет.' },
+    { when: '=0', text: 'Прямая касается графика в точках <span class="m"><i>x</i> = ±2</span>.' },
+    { when: '0..4', text: 'Прямая пересекает обе ветви и «шапку» — четыре точки.' },
+    { when: '=4', text: 'Прямая проходит через вершину «шапки» (0; 4) — ровно три решения. <b>Ответ:</b> <span class="m"><i>a</i> = 4</span>.' },
+    { when: '>4', text: 'Прямая выше «шапки» — две точки.' }
+  ]
+};
+
+YCFig.mount(document.getElementById('fig-pyramid'), pyramid);
+YCFig.mount(document.getElementById('fig-section'), cube);
+YCFig.mount(document.getElementById('fig-param'), param);
+</script>
+</body>
+</html>

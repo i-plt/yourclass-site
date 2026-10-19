@@ -1,0 +1,74 @@
+/* yourClass.online — общий стиль интерактивных чертежей.
+   Цвета — из _System/brand/tokens.json («Мята и мандарин»).
+   Тема: по системной настройке, либо принудительно <html data-theme="light|dark">. */
+
+:root{
+  --ycf-surface:#ffffff;   /* фон доски: theme.light.surface */
+  --ycf-ink:#0f2e3a;       /* рёбра, подписи: theme.light.text */
+  --ycf-muted:#4d6670;     /* оси, невидимое: theme.light.muted */
+  --ycf-grid:#d5e8e4;      /* сетка, рамка: theme.light.line */
+  --ycf-main:#00b39f;      /* графики: theme.light.mint */
+  --ycf-done:#0a7d70;      /* построенное на прошлых шагах: theme.light.mint_text */
+  --ycf-new:#e67a00;       /* новое на этом шаге: scale.mandarin.600 */
+  --ycf-new-text:#b35500;  /* подписи нового: theme.light.mandarin_text */
+  --ycf-fill:#00b39f;      /* заливка сечения (с прозрачностью) */
+  --ycf-fill-opacity:.16;
+  --ycf-soft:#dcf7f2;      /* фон подписи шага: theme.light.mint_soft */
+  --ycf-new-soft:#ffe8cc;
+  --ycf-line-w:2;          /* основная линия, px */
+  --ycf-thin-w:1.25;       /* вспомогательная, px */
+  --ycf-font:"STIX Two Text","STIX Two Math","Times New Roman",serif;
+  --ycf-ui-font:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ycf-surface:#182b33; --ycf-ink:#e8f3f1; --ycf-muted:#9fb4bb; --ycf-grid:#24404a;
+    --ycf-main:#2fd6bf; --ycf-done:#2fd6bf; --ycf-new:#ffa940; --ycf-new-text:#ffa940;
+    --ycf-fill:#2fd6bf; --ycf-fill-opacity:.14; --ycf-soft:#103631; --ycf-new-soft:#3a2a12;
+  }
+}
+:root[data-theme="dark"]{
+  --ycf-surface:#182b33; --ycf-ink:#e8f3f1; --ycf-muted:#9fb4bb; --ycf-grid:#24404a;
+  --ycf-main:#2fd6bf; --ycf-done:#2fd6bf; --ycf-new:#ffa940; --ycf-new-text:#ffa940;
+  --ycf-fill:#2fd6bf; --ycf-fill-opacity:.14; --ycf-soft:#103631; --ycf-new-soft:#3a2a12;
+}
+
+.ycf{margin:0; font-family:var(--ycf-ui-font); color:var(--ycf-ink)}
+.ycf-board{width:100%; aspect-ratio:1/1; max-height:min(78vh,560px); margin:0 auto;
+  background:var(--ycf-surface); border:1px solid var(--ycf-grid); border-radius:16px; overflow:hidden; position:relative}
+.ycf-board.wide{aspect-ratio:4/3}
+.ycf-board .JXGtext{font-family:var(--ycf-font); font-size:17px; line-height:1; white-space:nowrap; user-select:none; -webkit-user-select:none}
+.ycf-board .ycf-lab{font-style:italic}
+.ycf-board .ycf-tick{font-size:13px}
+.ycf-board .ycf-formula{font-size:17px; font-style:italic}
+
+/* Управление */
+.ycf-ctl{display:grid; gap:10px; margin-top:12px}
+.ycf-row{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px}
+.ycf-row label{font-size:14px; font-weight:600; color:var(--ycf-muted); min-width:64px}
+.ycf-row output{font:400 17px/1 var(--ycf-font); min-width:64px; text-align:right; font-variant-numeric:tabular-nums}
+.ycf-row output i{font-style:italic}
+.ycf-step{display:flex; align-items:center; gap:8px}
+.ycf-btn{inline-size:44px; block-size:44px; border-radius:12px; border:1.5px solid var(--ycf-grid);
+  background:var(--ycf-surface); color:var(--ycf-ink); font:600 20px/1 var(--ycf-ui-font); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; padding:0}
+.ycf-btn:disabled{opacity:.35; cursor:default}
+.ycf-btn:not(:disabled):hover{border-color:var(--ycf-main)}
+
+/* Ползунок: крупный «бегунок» под палец */
+.ycf input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:44px; margin:0; background:transparent; cursor:pointer; touch-action:pan-y}
+.ycf input[type=range]:focus-visible{outline:2px solid var(--ycf-main); outline-offset:2px; border-radius:8px}
+.ycf input[type=range]::-webkit-slider-runnable-track{height:6px; border-radius:3px; background:var(--ycf-grid)}
+.ycf input[type=range]::-moz-range-track{height:6px; border-radius:3px; background:var(--ycf-grid)}
+.ycf input[type=range]::-moz-range-progress{height:6px; border-radius:3px; background:var(--ycf-main)}
+.ycf input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:28px; height:28px; margin-top:-11px; border-radius:50%;
+  background:var(--ycf-surface); border:3px solid var(--ycf-main); box-sizing:border-box}
+.ycf input[type=range]::-moz-range-thumb{width:28px; height:28px; border-radius:50%; background:var(--ycf-surface); border:3px solid var(--ycf-main); box-sizing:border-box}
+
+.ycf-cap{margin-top:12px; padding:12px 14px; border-radius:12px; background:var(--ycf-soft); font-size:15px; line-height:1.5; min-height:3em}
+.ycf-cap b{font-weight:700}
+.ycf-cap .m{font-family:var(--ycf-font); font-size:17px; white-space:nowrap}
+.ycf-cap .m i{font-style:italic}
+.ycf-cap.hit{background:var(--ycf-new-soft)}
+.ycf-step .ycf-row{grid-template-columns:1fr auto}
+.ycf-step .ycf-row label{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
